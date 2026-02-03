@@ -18,7 +18,7 @@ const filters = [
 ];
 
 const LiveFeed: React.FC<LiveFeedProps> = ({ isOpen = false, onClose }) => {
-	const activities = useQuery(api.queries.listActivities);
+	
 	const [selectedType, setSelectedType] = useState<string>("all");
 	const [selectedAgentId, setSelectedAgentId] = useState<Id<"agents"> | undefined>(undefined);
 
