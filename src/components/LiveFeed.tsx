@@ -17,6 +17,24 @@ const filters = [
 	{ id: "status", label: "Status", count: 0 },
 ];
 
+function timeAgo(date: number) {
+	const seconds = Math.floor((Date.now() - date) / 1000);
+	
+    if (seconds < 60) return "just now";
+
+	let interval = seconds / 31536000;
+	if (interval > 1) return Math.floor(interval) + "y ago";
+	interval = seconds / 2592000;
+	if (interval > 1) return Math.floor(interval) + "mo ago";
+	interval = seconds / 86400;
+	if (interval > 1) return Math.floor(interval) + "d ago";
+	interval = seconds / 3600;
+	if (interval > 1) return Math.floor(interval) + "h ago";
+	interval = seconds / 60;
+	if (interval > 1) return Math.floor(interval) + "m ago";
+	return Math.floor(seconds) + "s ago";
+}
+
 const LiveFeed: React.FC<LiveFeedProps> = ({ isOpen = false, onClose }) => {
 	
 	const [selectedType, setSelectedType] = useState<string>("all");
@@ -93,7 +111,7 @@ const LiveFeed: React.FC<LiveFeedProps> = ({ isOpen = false, onClose }) => {
 						>
 							All Agents
 						</div>
-						{agents.slice(0, 8).map((a) => (
+						{agents.map((a) => (
 							<div
 								key={a._id}
 								onClick={() => setSelectedAgentId(a._id)}
@@ -122,7 +140,7 @@ const LiveFeed: React.FC<LiveFeedProps> = ({ isOpen = false, onClose }) => {
 								</span>{" "}
 								{item.message}
 								<div className="text-[10px] text-muted-foreground mt-1">
-									just now
+									{timeAgo(item._creationTime)}
 								</div>
 							</div>
 						</div>
