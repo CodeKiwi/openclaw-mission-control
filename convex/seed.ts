@@ -16,7 +16,7 @@ export const run = mutation({
 		// Insert Agents
 		const agents = [
 			{
-				name: "Manish",
+				name: "Josh",
 				role: "Founder",
 				level: "LEAD",
 				status: "active",
